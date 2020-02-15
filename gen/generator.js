@@ -5,6 +5,7 @@ const path = require("path");
 
 const argv = require("yargs").argv;
 const buildGlyphs = require("./build-glyphs.js");
+const EmptyFont = require("./empty-font.js");
 const parameters = require("../support/parameters");
 const formVariantData = require("../support/variant-data");
 const regulateGlyphs = require("../support/regulate-glyph");
@@ -19,7 +20,6 @@ function objHashNonEmpty(obj) {
 const PARAMETERS_TOML = path.resolve(__dirname, "../parameters.toml");
 const PRIVATE_TOML = path.resolve(__dirname, "../private.toml");
 const VARIANTS_TOML = path.resolve(__dirname, "../variants.toml");
-const EMPTY_FONT_TOML = path.resolve(__dirname, "../empty-font.toml");
 
 function tryParseToml(str) {
 	try {
@@ -39,7 +39,7 @@ function getParameters(argv) {
 	);
 	const variantData = tryParseToml(VARIANTS_TOML);
 
-	const para = parameters.build(parametersData, argv._);
+	const para = parameters.build(parametersData, argv._, { "shape-weight": argv["shape-weight"] });
 	const variantsData = formVariantData(variantData, para);
 	para.variants = variantsData;
 	para.variantSelector = parameters.build(variantsData, ["default", ...argv._]);
@@ -58,9 +58,9 @@ function getParameters(argv) {
 
 // Font building
 const font = (function() {
-	const emptyFont = tryParseToml(EMPTY_FONT_TOML);
+	const emptyFont = EmptyFont();
 	const para = getParameters(argv);
-	const font = buildGlyphs.build.call(emptyFont, para);
+	const font = buildGlyphs.build(emptyFont, para);
 	font.parameters = para;
 	return font;
 })();

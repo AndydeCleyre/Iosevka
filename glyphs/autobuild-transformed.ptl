@@ -417,6 +417,7 @@ export : define [apply] : begin
 		list 0x215E 'seven' 'eight'
 		list 0x2189 'zero' 'three'
 		# care-of
+		list 0x2100 'largescripta' 'C'
 		list 0x2105 'C' 'O'
 		list 0x2106 'C' 'U'
 		# fraction bar
@@ -466,7 +467,7 @@ export : define [apply] : begin
 					include : Translate (targetW / 2) 0
 					include : Italify
 
-					if mark : include [MarksetDiv para.diversityM].(mark)
+					if mark : include [DivFrame para.diversityM].markSet.(mark)
 					save glyphName unicode
 
 	define stdShrink : clamp 0.75 0.9 : linreg 72 0.75 108 0.9 STROKE

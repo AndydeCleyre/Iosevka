@@ -1,5 +1,4 @@
-# Iosevka ![Version](https://img.shields.io/github/release/be5invis/Iosevka.svg) [![Patreon](https://img.shields.io/badge/donate-patreon-red.svg)](https://www.patreon.com/user?u=5787198) [![Donate](https://img.shields.io/badge/donate-alipay-orange.svg)](http://7xpdnl.dl1.z0.glb.clouddn.com/T1v4huXnleXXXXXXXX.png)
-
+# Iosevka ![Version](https://img.shields.io/github/release/be5invis/Iosevka.svg)
 Coders’ typeface, built from code.
 
 ![](https://raw.githubusercontent.com/be5invis/Iosevka/master/images/preview-all.png)
@@ -73,7 +72,8 @@ Since version 2.0, Iosevka would no longer support building via `makefile`. To i
    # Override default building weights
    # When buildPlans.<plan name>.weights is absent
    # All weights would built and mapped to default shape/CSS
-   [buildPlans.iosevka-custom.weights.regular]
+   # IMPORTANT : Currently "menu" property only support 100, 200, 300, 400, 500, 600, 700, 800, 900.
+   #              and "shape" properly only supports number between 100 and 900 (inclusive).
    shape = 400                            # Weight for glyph shapes
    menu  = 400                            # Weight for menu name
    css   = 400                            # Weight for WebFont CSS
